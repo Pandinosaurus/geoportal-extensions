@@ -2,25 +2,46 @@ define([], function () {
 
     "use strict";
 
-    var MeasureToolBoxDOM = {
+    var ToolBoxDOM = {
 
-        _toolboxId : "GPtoolbox-main-measure",
-        _buttonId : "GPtoolbox-button-measure",
-        _widgetId : "GPtoolbox-widget-measure",
+        _toolboxId : "GPtoolbox-main",
+        _buttonId : "GPtoolbox-button",
+        _widgetId : "GPtoolbox-widget",
 
         /** get toolBox ID */
-        getToolBoxID : function (uid) {
-            return (uid) ? this._toolboxId + "-" + uid : this._toolboxId;
+        getToolBoxID : function (uid, name) {
+            var id = this._toolboxId;
+            if (name) {
+                id = id + "-" + name;
+            }
+            if (uid) {
+                id = id + "-" + uid;
+            }
+            return id;
         },
 
         /** get toolBox ID */
-        getButtonID : function (uid) {
-            return (uid) ? this._buttonId + "-" + uid : this._buttonId;
+        getButtonID : function (uid, name) {
+            var id = this._buttonId;
+            if (name) {
+                id = id + "-" + name;
+            }
+            if (uid) {
+                id = id + "-" + uid;
+            }
+            return id;
         },
 
         /** get toolBox Container for widget */
-        getWidgetID : function (uid) {
-            return (uid) ? this._widgetId + "-" + uid : this._widgetId;
+        getWidgetID : function (uid, name) {
+            var id = this._widgetId;
+            if (name) {
+                id = id + "-" + name;
+            }
+            if (uid) {
+                id = id + "-" + uid;
+            }
+            return id;
         },
 
         /**
@@ -28,24 +49,24 @@ define([], function () {
         *
         * @returns {DOMElement} DOM element
         */
-        _createToolBoxContainerElement : function (uid) {
+        _createToolBoxContainerElement : function (uid, name) {
 
-            // <div id="GPtoolbox-measure-main">
-            //   <button id="GPtoolbox-measure-button">&#9776;</button>
-            //   <div id="GPtoolbox-measure-widget">
+            // <div id="GPtoolbox-main">
+            //   <button id="GPtoolbox-button">&#9776;</button>
+            //   <div id="GPtoolbox-widget">
             //     <!-- HERE : widgets tools measures -->
             //   </div>
             // </div>
             var container = document.createElement("div");
-            container.id  = this.getToolBoxID(uid);
+            container.id  = this.getToolBoxID(uid, name);
             container.className = "GPshowAdvancedToolPicto";
 
             var button = document.createElement("button");
-            button.id = this.getButtonID(uid);
+            button.id = this.getButtonID(uid, name);
             var self = this;
             button.addEventListener("click", function () {
                 this.blur(); // permet de perdre le focus !
-                var widget = document.getElementById(self.getWidgetID(uid));
+                var widget = document.getElementById(self.getWidgetID(uid, name));
                 if ( widget.style.display === "block") {
                     widget.style.display = "none";
                 } else {
@@ -55,7 +76,7 @@ define([], function () {
             container.appendChild(button);
 
             var widget = document.createElement("div");
-            widget.id = this.getWidgetID(uid);
+            widget.id = this.getWidgetID(uid, name);
             widget.addEventListener("click", function () {
 
                 /*
@@ -92,5 +113,5 @@ define([], function () {
         }
     };
 
-    return MeasureToolBoxDOM;
+    return ToolBoxDOM;
 });
