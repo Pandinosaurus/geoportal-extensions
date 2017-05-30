@@ -660,13 +660,17 @@ define([], function () {
          *
          * @param {String} layerDescription - description to be displayed for layer
          * @param {Number} id - layer identifier in getCapabilities response layers list
+         * @param {String} layerName - layer name to be displayed for layer (on hover)
          * @returns {DOMElement} DOM element
          */
-        _createImportGetCapResultElement : function (layerDescription, id) {
+        _createImportGetCapResultElement : function (layerDescription, id, layerName) {
             var div = document.createElement("div");
             div.className = "GPimportGetCapProposal";
             div.innerHTML = layerDescription;
             div.title = layerDescription;
+            if ( layerName ) {
+                div.title += " [" + layerName + "]";
+            }
 
             var context = this;
             if ( div.addEventListener ) {

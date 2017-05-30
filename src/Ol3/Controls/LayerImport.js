@@ -1116,6 +1116,7 @@ define([
         var parser;
         var layers;
         var layerDescription;
+        var layerName;
         var projection;
         this._getCapResponseWMSLayers = [];
 
@@ -1178,8 +1179,9 @@ define([
                                 // si la projection de la couche est connue par ol.proj,
                                 // on ajoute chaque couche de la réponse dans la liste des couches accessibles
                                 layerDescription = layers[j].Title;
+                                layerName = layers[j].Name;
                                 if ( this._getCapResultsListContainer ) {
-                                    this._getCapResultsListContainer.appendChild(this._createImportGetCapResultElement(layerDescription, j));
+                                    this._getCapResultsListContainer.appendChild(this._createImportGetCapResultElement(layerDescription, j, layerName));
                                 }
                             } else {
                                 // si la projection de la couche n'est pas connue par ol.proj,
@@ -1213,6 +1215,7 @@ define([
         var mapProjCode = this._getMapProjectionCode();
         var projection;
         var layerDescription;
+        var layerName;
 
         // 1. héritage éventuels des informations de la couche parent
         if ( parentLayersInfos ) {
@@ -1302,8 +1305,9 @@ define([
                 layerObj._projection = projection;
                 // on ajoute chaque couche de la réponse dans la liste des couches accessibles
                 layerDescription = layerObj.Title;
+                layerName = layerObj.Name;
                 if ( this._getCapResultsListContainer ) {
-                    this._getCapResultsListContainer.appendChild(this._createImportGetCapResultElement(layerDescription, lastIndex));
+                    this._getCapResultsListContainer.appendChild(this._createImportGetCapResultElement(layerDescription, lastIndex, layerName));
                 }
                 // puis on stoke la couche dans la liste pour faire le lien avec le DOM
                 this._getCapResponseWMSLayers[lastIndex] = layerObj;
