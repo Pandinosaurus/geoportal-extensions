@@ -453,6 +453,7 @@
             ol : "empty:",
             leaflet : "empty:",
             vg : "empty:",
+            itowns : "empty:",
             request : "empty:", // depenance externe pour nodejs !
             xmldom : "empty:",  // depenance externe pour nodejs !
             proj4 : "../../../../node_modules/proj4/dist/proj4-src" /*+ modeExt*/,
